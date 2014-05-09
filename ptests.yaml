@@ -1,0 +1,33 @@
+metadata:
+    name: ptest
+    format: "Lava-Test-Shell Test Definition 1.0"
+    description: "run OpenEmbedded ptests"
+    maintainer:
+        - alan.bennett@linaro.org
+    os:
+        - openembedded
+    scope:
+        - unit
+    devices:
+        - beaglebone-black
+
+params:
+    TESTURL: http://autobuilder.yoctoproject.org/pub/nightly/CURRENT/ipk/armv7a-vfp-neon/acl-ptest_2.2.52-r0_armv7a-vfp-neon.ipk
+    TESTNAME: acl
+    TESTPATH: /usr/lib/acl/ptest
+
+run:
+    steps:
+        - "rm -f *.ipk"
+        - "wget $TESTURL"
+        - "ar -x *.ipk"
+        - "tar xvzf data.tgz -C /"
+        - "cd $TESTPATH"
+        - "./run-ptest"
+
+parse:
+    pattern: "(?P<result>(PASS)): (?P<test_case_id>.*)"
+    fixupdict:
+        PASS: pass
+        FAIL: fail
+        SKIP: skip
