@@ -21,7 +21,7 @@ run:
         - "rm -f *.ipk"
         - "wget $TESTURL"
         - "ar -x *.ipk"
-        - "tar xvzf data.tgz -C /"
+        - "tar xvzf data.tar.gz -C /"
         - "cd $TESTPATH"
         - "./run-ptest"
 
