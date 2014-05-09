@@ -23,7 +23,8 @@ run:
         - "ar -x *.ipk"
         - "tar xvzf data.tar.gz -C /"
         - "cd $TESTPATH"
-        - "./run-ptest"
+        - "./run-ptest > /ptest.log"
+        - ". clean.sh; cat /clean.log"
 
 parse:
     pattern: "(?P<result>(PASS|SKIP|FAIL)): (\\$ )?(?P<test_case_id>.*)"
