@@ -26,7 +26,7 @@ run:
         - "./run-ptest"
 
 parse:
-    pattern: "(?P<result>(PASS|SKIP|FAIL)): (\$ )?(?P<test_case_id>.*)"
+    pattern: "(?P<result>(PASS|SKIP|FAIL)): (\\$ )?(?P<test_case_id>.*)"
     fixupdict:
         PASS: pass
         FAIL: fail
