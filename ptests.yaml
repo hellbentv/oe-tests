@@ -12,23 +12,17 @@ metadata:
         - beaglebone-black
 
 params:
-    TESTURL: http://autobuilder.yoctoproject.org/pub/nightly/CURRENT/ipk/armv7a-vfp-neon/acl-ptest_2.2.52-r0_armv7a-vfp-neon.ipk
     TESTNAME: acl
     TESTPATH: /usr/lib/acl/ptest
 
 run:
     steps:
-        - "rm -f *.ipk"
-        - "cp clean.sh /"
-        - "wget $TESTURL"
-        - "ar -x *.ipk"
-        - "tar xvzf data.tar.gz -C /"
         - "cd $TESTPATH"
         - "./run-ptest > /ptest.log"
         - ". /clean.sh; cat /clean.log"
 
 parse:
-    pattern: "(?P<result>(PASS|SKIP|FAIL)): (\\$ )?(?P<test_case_id>.*)"
+    pattern: "(?P<result>(PASS|SKIP|FAIL)):\s.*?(\\$ )?(?P<test_case_id>.*)"
     fixupdict:
         PASS: pass
         FAIL: fail
