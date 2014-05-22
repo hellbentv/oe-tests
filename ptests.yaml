@@ -17,10 +17,8 @@ params:
 
 run:
     steps:
-        - "echo Python-`which python`"
         - "cd $TESTPATH"
-        - "./run-ptest > /ptest.log"
-        - ". /clean.sh; cat /clean.log"
+        - "./run-ptest"
 
 parse:
     pattern: "(?P<result>(PASS|SKIP|FAIL)): (\\$ )?(?P<test_case_id>.*)"
