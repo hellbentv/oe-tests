@@ -17,6 +17,7 @@ params:
 
 run:
     steps:
+        - "echo Python-`which python`"
         - "cd $TESTPATH"
         - "./run-ptest > /ptest.log"
         - ". /clean.sh; cat /clean.log"
