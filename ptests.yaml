@@ -22,7 +22,7 @@ run:
         - ". /clean.sh; cat /clean.log"
 
 parse:
-    pattern: "(?P<result>(PASS|SKIP|FAIL)):\s.*?(\\$ )?(?P<test_case_id>.*)"
+    pattern: "(?P<result>(PASS|SKIP|FAIL)): (\\$ )?(?P<test_case_id>.*)"
     fixupdict:
         PASS: pass
         FAIL: fail
