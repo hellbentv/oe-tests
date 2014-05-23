@@ -1,5 +1,5 @@
 metadata:
-    name: ptest
+    name: perl-ptest
     format: "Lava-Test-Shell Test Definition 1.0"
     description: "run OpenEmbedded ptests"
     maintainer:
@@ -11,17 +11,13 @@ metadata:
     devices:
         - beaglebone-black
 
-params:
-    TESTNAME: acl
-    TESTPATH: /usr/lib/acl/ptest
-
 run:
     steps:
-        - "cd $TESTPATH"
+        - "cd /usr/lib/pero/ptest"
         - "./run-ptest"
 
 parse:
-    pattern: "(?P<result>(PASS|SKIP|FAIL)): (\\$ )?(?P<test_case_id>.*)"
+    pattern: "(?P<result>(PASS|SKIP|FAIL)):\\s+(?P<test_case_id>[/a-zA-Z0-9_-]*)"
     fixupdict:
         PASS: pass
         FAIL: fail
